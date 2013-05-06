@@ -10,10 +10,10 @@
  * 作者：邹景立  邮箱:anyon@139.com  微博：http://weibo.com/anyons
  * ============================================================== */
 
-header("Content-Type:text/html;charset=utf-8");//统一页面编码
-date_default_timezone_set('PRC');//调整系统时区
-define('REQUEST_TIME_START', microtime(true));//记录页面开始执行的时间
-session_start();//默认开启SESSION会话
+header("Content-Type:text/html;charset=utf-8"); //统一页面编码
+date_default_timezone_set('PRC'); //调整系统时区
+define('REQUEST_TIME_START', microtime(true)); //记录页面开始执行的时间
+session_start(); //默认开启SESSION会话
 //声明框架源文件所在目录
 define('CXPHP', str_replace('\\', '/', dirname(__FILE__)));
 //定义项目根目录
