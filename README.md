@@ -298,7 +298,7 @@
 
             <p class=MsoNormal><a name="OLE_LINK21"><span lang=EN-US style='font-family:
                                                           "微软雅黑","sans-serif"'><img width=576 height=188 id="图片 1"
-                           src="readme.files/image001.jpg"></span></a></p>
+                           src="Document/readme.files/image001.jpg"></span></a></p>
 
             <p class=MsoNormal style='margin-left:21.0pt;text-indent:-21.0pt;line-height:
                18.0pt'><span lang=EN-US style='font-family:Wingdings'>&Oslash;<span style='font:7.0pt "Times New Roman"'>&nbsp;
@@ -317,7 +317,7 @@
 
             <p class=MsoNormal style='margin-top:7.8pt'><a name="OLE_LINK3"></a><a
                     name="OLE_LINK2"><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'><img
-                            width=576 height=187 src="readme.files/image002.jpg"></span></a></p>
+                            width=576 height=187 src="Document/readme.files/image002.jpg"></span></a></p>
 
             <p class=MsoNormal style='margin-left:21.0pt;text-indent:-21.0pt;line-height:
                18.0pt'><span lang=EN-US style='font-family:Wingdings'>&Oslash;<span style='font:7.0pt "Times New Roman"'>&nbsp;
@@ -345,7 +345,7 @@
                             lang=EN-US>Base</span>）</a></span></p>
 
             <p class=MsoNormal style='margin-top:7.8pt'><span lang=EN-US style='font-family:
-                                                              "微软雅黑","sans-serif"'><img width=576 height=170 src="readme.files/image003.jpg"></span></p>
+                                                              "微软雅黑","sans-serif"'><img width=576 height=170 src="Document/readme.files/image003.jpg"></span></p>
 
             <p class=MsoNormal style='margin-left:21.0pt;text-indent:-21.0pt;line-height:
                18.0pt'><span lang=EN-US style='font-family:Wingdings'>&Oslash;<span style='font:7.0pt "Times New Roman"'>&nbsp;
@@ -394,7 +394,7 @@
 
             <p class=MsoNormal style='margin-top:7.8pt'><a name="OLE_LINK27"></a><a
                     name="OLE_LINK26"><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'><img
-                            width=576 height=247 src="readme.files/image004.jpg"></span></a></p>
+                            width=576 height=247 src="Document/readme.files/image004.jpg"></span></a></p>
 
             <p class=MsoNormal style='margin-left:21.0pt;text-indent:-21.0pt;line-height:
                18.0pt'><span lang=EN-US style='font-family:Wingdings'>&Oslash;<span style='font:7.0pt "Times New Roman"'>&nbsp;
@@ -440,7 +440,7 @@
                             lang=EN-US>~Runtime</span>）</span></a></p>
 
             <p class=MsoNormal style='margin-top:7.8pt'><span lang=EN-US style='font-family:
-                                                              "微软雅黑","sans-serif"'><img width=576 height=162 src="readme.files/image005.jpg"></span></p>
+                                                              "微软雅黑","sans-serif"'><img width=576 height=162 src="Document/readme.files/image005.jpg"></span></p>
 
             <p class=MsoNormal style='margin-left:21.0pt;text-indent:-21.0pt;line-height:
                18.0pt'><span lang=EN-US style='font-family:Wingdings'>&Oslash;<span style='font:7.0pt "Times New Roman"'>&nbsp;
@@ -484,7 +484,7 @@
                     "微软雅黑","sans-serif"'>应用配置文件<span lang=EN-US>:config.php</span>（位于应用根目录下），优先级较高。</span></p>
 
             <p class=MsoNormal style='margin-top:7.8pt'><span lang=EN-US style='font-family:
-                                                              "微软雅黑","sans-serif"'><img width=576 height=504 src="readme.files/image006.jpg"></span></p>
+                                                              "微软雅黑","sans-serif"'><img width=576 height=504 src="Document/readme.files/image006.jpg"></span></p>
 
             <p class=MsoTitle style='margin-top:7.8pt;margin-right:0cm;margin-bottom:3.0pt;
                margin-left:21.0pt;text-align:justify;text-justify:inter-ideograph;text-indent:
@@ -494,7 +494,7 @@
                         style='font-size:14.0pt;font-family:"微软雅黑","sans-serif"'>单一入口文件</span></a></p>
 
             <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'><img
-                        width=576 height=194 src="readme.files/image007.jpg"></span></p>
+                        width=576 height=194 src="Document/readme.files/image007.jpg"></span></p>
 
             <p class=MsoNormal style='line-height:22.0pt'><span style='font-family:"微软雅黑","sans-serif"'>在这里只需要导入框架的初始化文件即可以使用。</span></p>
 
@@ -535,8 +535,8 @@
 
             <p class=MsoNormal style='margin-top:7.8pt;margin-right:0cm;margin-bottom:7.8pt;
                margin-left:0cm;text-indent:21.0pt;line-height:20.0pt'><img width=577
-                   height=188 src="readme.files/image008.png" align=left hspace=12><img width=577
-                   height=248 src="readme.files/image009.png" align=left hspace=12><span
+                   height=188 src="Document/readme.files/image008.png" align=left hspace=12><img width=577
+                   height=248 src="Document/readme.files/image009.png" align=left hspace=12><span
                    style='font-family:"微软雅黑","sans-serif"'>在部署网站时，项目的目录结构往往由不同项目的应用而决定。使用<span
                         lang=EN-US>CXPHP</span>框架时，项目的应用目录<span lang=EN-US>(Action</span>、<span
                         lang=EN-US>Model</span>、<span lang=EN-US>View</span>、<span lang=EN-US>Common</span>、<span
