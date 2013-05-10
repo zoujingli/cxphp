@@ -106,8 +106,8 @@ CXPHP框架在内部的Common目录下的functions.inc.php文件中，提供了�
     P($other);                      #可以打印输出PHP的任何类型
     P($arr, $object, $string, $other);    #可以同时打印输出多个PHP变量
 
-函数D：快速实例化Model类库，而且实例化Model类只能用这个函数。而且这个函数不仅可以实例化已声明的Model类，也可以实例化没有声明的Model类
-(只要参数对应的表名存在即可)。另外，不仅可以声明自己应用中的Model类，也可以声明其他应用中的Model类。该函数大量用于控制器中，使用方式如下：
+　　函数D：快速实例化Model类库，而且实例化Model类只能用这个函数。而且这个函数不仅可以实例化已声明的Model类，也可以实例化没有声明的Model类
+    (只要参数对应的表名存在即可)。另外，不仅可以声明自己应用中的Model类，也可以声明其他应用中的Model类。该函数大量用于控制器中，使用方式如下：
 
     $book = D(“book”);              #如果在本应用的models中声明了一个类Book,则实例化book对象
     $book = D(“book”);              #如果在本应用的models中没有声明Book类，但book表存在也行
