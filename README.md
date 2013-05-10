@@ -15,8 +15,8 @@ CXPHP 框架
 　　操作系统：支持Linux/Windows服务器,可以跨平台应用
 
 　　WEB服务器：可运行于Apache、IIS和Nginx中
-　　
-　　PHP环境：PHP5.0以上版本，需要安装mysqli、PDO、GD扩展等模块
+    
+    PHP环境：PHP5.0以上版本，需要安装mysqli、PDO、GD扩展等模块
 
 三、目录结构
 ----------------
