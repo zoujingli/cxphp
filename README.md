@@ -134,16 +134,17 @@ config.php )和入口文件的位置，可以由不同项目的应用自己决�
 ----------------
 　　CXPHP框架在内部的Common目录下的functions.inc.php文件中，提供了几个常用的快捷操作的全局函数，并在CXPHP的初始化文件init.php中自动包含了
 该文件，所以在任何位置都可以直接调用这几个函数。包括P()和D（）两个内置函数，详细的功能介绍和用法如下：
+
     函数P：按照特定格式打印输出一个或多个任意类型（数组、对象、字符串等）的变量或数据，打印的值供程序员作为开发时的参考使用。使用方式如下：
-    $arr=array(1,2,3,4,5,6);
-    P($arr);                            #可以打印输出PHP数组
-    $object=new Object();
-    P($object);                         #可以打印输出PHP对象
-    $string=”this is a string”;
-    P($string);                         #可以打印输出PHP自己串
-    $other=其它类型;
-    P($other);                          #可以打印输出PHP的任何类型
-    P($arr, $object, $string, $other);  #可以同时打印输出多个PHP变量
+        $arr=array(1,2,3,4,5,6);
+        P($arr);                            #可以打印输出PHP数组
+        $object=new Object();
+        P($object);                         #可以打印输出PHP对象
+        $string=”this is a string”;
+        P($string);                         #可以打印输出PHP自己串
+        $other=其它类型;
+        P($other);                          #可以打印输出PHP的任何类型
+        P($arr, $object, $string, $other);  #可以同时打印输出多个PHP变量
 
 　　函数D：快速实例化Model类库，而且实例化Model类只能用这个函数。而且这个函数不仅可以实例化已声明的Model类，也可以实例化没有声明的Model类
     (只要参数对应的表名存在即可)。另外，不仅可以声明自己应用中的Model类，也可以声明其他应用中的Model类。该函数大量用于控制器中，使用方式如下：
