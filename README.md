@@ -196,17 +196,17 @@ CXPHP框架的URL访问格式。
 
   　　　　 配置文件名全部以小写命名。如：
 
-   　　　　　config.php
+               config.php
 
   　　　　控制器类及Model类以驼峰命名法命名。如：
 
-   　　　　　IndexAction.class.php
+               IndexAction.class.php
 
-   　　　　　UserModel.class.php
+               UserModel.class.php
 
   　　　　模板文件名全部以小写命名。如：
 
-  　　　　　index.tpl
+               index.tpl
 
  　　* 系统函数库重新封装并添加函数注释
 
