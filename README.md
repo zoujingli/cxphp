@@ -166,97 +166,97 @@ CXPHP框架的URL访问格式。
 
 十一、更新日志
 ----------------
-#
-# D.20121119 更新
 
-# 　　* 框架实战调试，修正已发现的BUG
+ D.20121119 更新
 
-# 　　* 更新扩展类
+ 　　* 框架实战调试，修正已发现的BUG
 
-# 　　* 再次优化系统初始化机制，提高系统运行效率
+ 　　* 更新扩展类
 
-#
-#
-#
-#  D.20121115 更新 
+ 　　* 再次优化系统初始化机制，提高系统运行效率
 
-#　　 * 优化初始化目录机制
 
-# 　　* 重定义命名规则（解决LINUX下区别大小写的部分BUG）
 
-#  　　　　 所有命名均不加S（单数形式）
 
-# 　　　　  目录变量的值后面不加斜线(/)
+  D.20121115 更新 
 
-# 　　　　  系统目录均首字母大写(Resource目录下的子目录除外)
+　　 * 优化初始化目录机制
 
-#  　　　　 函数库文件名全部以小写命名，以'.inc.php'结尾。如：
+ 　　* 重定义命名规则（解决LINUX下区别大小写的部分BUG）
 
-#               function.inc.php
+  　　　　 所有命名均不加S（单数形式）
 
-#  　　　　 配置文件名全部以小写命名。如：
+ 　　　　  目录变量的值后面不加斜线(/)
 
-#   　　　　　config.php
+ 　　　　  系统目录均首字母大写(Resource目录下的子目录除外)
 
-#  　　　　控制器类及Model类以驼峰命名法命名。如：
+  　　　　 函数库文件名全部以小写命名，以'.inc.php'结尾。如：
 
-#   　　　　　IndexAction.class.php
+               function.inc.php
 
-#   　　　　　UserModel.class.php
+  　　　　 配置文件名全部以小写命名。如：
 
-#  　　　　模板文件名全部以小写命名。如：
+   　　　　　config.php
 
-#  　　　　　index.tpl
+  　　　　控制器类及Model类以驼峰命名法命名。如：
 
-# 　　* 系统函数库重新封装并添加函数注释
+   　　　　　IndexAction.class.php
 
-#　　 * 增强系统基类 (Action.class.php)
+   　　　　　UserModel.class.php
 
-#  　　　　方法：public static run() //启用框架
+  　　　　模板文件名全部以小写命名。如：
 
-# 　　　 　方法：protected static mkdir() //批量递归创建目录（支持数组字串目录混传）
+  　　　　　index.tpl
 
-#  　　　　方法：protected static touch() //批量创建文件
+ 　　* 系统函数库重新封装并添加函数注释
 
-#  　　　　方法：protected success() //操作成功跳转页面
+　　 * 增强系统基类 (Action.class.php)
 
-#  　　　　方法：protected error() //操作失败跳转页面
+  　　　　方法：public static run() //启用框架
 
-# 　　* 默认向模板中赋值 (Template.class.php)
+ 　　　 　方法：protected static mkdir() //批量递归创建目录（支持数组字串目录混传）
 
-#  　　　　Smarty变量：$root //项目根地址
+  　　　　方法：protected static touch() //批量创建文件
 
-#  　　　　Smarty变量：$public //项目公共资源地址
+  　　　　方法：protected success() //操作成功跳转页面
 
-#  　　　　Smarty变量：$res //指定皮肤下的资源地址
+  　　　　方法：protected error() //操作失败跳转页面
 
-#  　　　　Smarty变量：$url //当前访问的模块地址
+ 　　* 默认向模板中赋值 (Template.class.php)
 
-# 　　* 优化系统配置函数 (大C方法)
+  　　　　Smarty变量：$root //项目根地址
 
-#  　　　　取回所有 如：C();
+  　　　　Smarty变量：$public //项目公共资源地址
 
-#  　　　　单一取值 如：C('DEBUG');
+  　　　　Smarty变量：$res //指定皮肤下的资源地址
 
-#  　　　　单一赋值 如：C('DEBUG',true);
+  　　　　Smarty变量：$url //当前访问的模块地址
 
-#  　　　　批量赋值 如：C(array('DEBUG'=>true,'TPL_STYLE'=>'Default'));
+ 　　* 优化系统配置函数 (大C方法)
 
-#  　　　　二维赋值 如：C(array('DIY'=>array('MYDIR'=>'MYVALUE','MYDIR2'=>'MYVALUE2')));
+  　　　　取回所有 如：C();
 
-# 　　* 增强系统扩展库
+  　　　　单一取值 如：C('DEBUG');
 
-#  　　　　分页 (Page.class.php)
+  　　　　单一赋值 如：C('DEBUG',true);
 
-#  　　　　验证码 (Vcode.class.php)[支持字体]
+  　　　　批量赋值 如：C(array('DEBUG'=>true,'TPL_STYLE'=>'Default'));
 
-#  　　　　批量上传 (Upload.class.php)
+  　　　　二维赋值 如：C(array('DIY'=>array('MYDIR'=>'MYVALUE','MYDIR2'=>'MYVALUE2')));
 
-#
+ 　　* 增强系统扩展库
 
-#
-#  D.20121113 发布
+  　　　　分页 (Page.class.php)
 
-# 　　* 首次发布的测试版本
-#
+  　　　　验证码 (Vcode.class.php)[支持字体]
+
+  　　　　批量上传 (Upload.class.php)
+
+
+
+
+  D.20121113 发布
+
+ 　　* 首次发布的测试版本
+
                                                                 anyon@139.com 
