@@ -70,8 +70,8 @@ return array(
     C('RUN_PATH') . '/CXPHP_LOCK_FILE' => '已经缓存PHP文件',
     C('APP_PATH') . '/config.php' => $config_null,
     C('APP_PATH') . '/Common/function.inc.php' => $func,
-    C('APP_PATH') . '/View/'.C('TPL_STYLE').'/Public/success' . C('TPL_SUFFIX') => file_get_contents(C('CXPHP') . '/Common/file_success'),
-    C('APP_PATH') . '/View/'.C('TPL_STYLE').'/Public/error' . C('TPL_SUFFIX') => file_get_contents(C('CXPHP') . '/Common/file_error'),
+    C('APP_PATH') . '/View/' . C('TPL_STYLE') . '/Public/success' . C('TPL_SUFFIX') => file_get_contents(C('CXPHP') . '/Common/file_success'),
+    C('APP_PATH') . '/View/' . C('TPL_STYLE') . '/Public/error' . C('TPL_SUFFIX') => file_get_contents(C('CXPHP') . '/Common/file_error'),
 );
 
 
