@@ -13,7 +13,7 @@
  *
  * ***************************************************************** */
 
-class Upload{
+class Upload {
 
 	private $path; #文件上传成功后存放的目录
 	private $exts; #允许上传的文件类型
@@ -33,7 +33,7 @@ class Upload{
 
 	/* 构造方法 */
 
-	public function __construct($path = '',$exts = '',$size = 0){
+	public function __construct($path = '', $exts = '', $size = 0) {
 		$this->path = empty($path) ? C('PRO_PATH') . "/Upload/tmp" : $path;
 		$this->exts = $exts;
 		$this->size = $size;
@@ -42,26 +42,26 @@ class Upload{
 
 	/* 初始操作 */
 
-	private function init(){
-		foreach($_FILES as $file){
-			foreach($file['name'] as $key => $name){
+	private function init() {
+		foreach ($_FILES as $file) {
+			foreach ($file['name'] as $key => $name) {
 
 				/* 文件类型检查 */
-				if(!empty($this->exts) && $file['error'][$key] == 0 && !in_array($this->getExt($name),$this->exts)){
+				if (!empty($this->exts) && $file['error'][$key] == 0 && !in_array($this->getExt($name), $this->exts)) {
 					$file['error'][$key] = 5; #文件类型不支持上传
 				}
 
 				/* 开始做文件上传 */
-				if($file['error'][$key] == 0){
+				if ($file['error'][$key] == 0) {
 					/* 文件大小超出检查 */
-					if(!empty($this->size) && $file['size'][$key] > $this->size){
+					if (!empty($this->size) && $file['size'][$key] > $this->size) {
 						$file['error'][$key] = 8;
-					}else{
+					} else {
 						/*  开始处理上传的文件 */
 						$newname = $this->getName($name);
 						$this->doDir(); #检查目录
 						$mvpath = realpath($this->path) . '/' . $newname;
-						if(!move_uploaded_file($file['tmp_name'][$key],$mvpath)){
+						if (!move_uploaded_file($file['tmp_name'][$key], $mvpath)) {
 							$file['error'][$key] = 7;
 						}
 					}
@@ -84,32 +84,32 @@ class Upload{
 
 	/* 返回结果集 ( 二维数组 ) */
 
-	public function result(){
+	public function result() {
 		return $this->result;
 	}
 
 	/* 得到文件的类型（通过文件后缀） */
 
-	private function getExt($name){
-		return strtolower(pathinfo($name,PATHINFO_EXTENSION));
+	private function getExt($name) {
+		return strtolower(pathinfo($name, PATHINFO_EXTENSION));
 	}
 
 	/* 生成文件名 */
 
-	private function getName($name){
-		return date('Ymd-His') . '-' . rand(1000,9999) . '.' . $this->getExt($name);
+	private function getName($name) {
+		return date('Ymd-His') . '-' . rand(1000, 9999) . '.' . $this->getExt($name);
 	}
 
 	/* 目录处理(递归) 注意在linux中的权限 */
 
-	private function doDir($path = ''){
+	private function doDir($path = '') {
 		$path = empty($path) ? $this->path : $path;
-		if(!empty($path) && (!(file_exists($path) && is_dir($path)))){
+		if (!empty($path) && (!(file_exists($path) && is_dir($path)))) {
 			$ppath = dirname($path);
-			if(!(file_exists($ppath) && is_dir($ppath))){
+			if (!(file_exists($ppath) && is_dir($ppath))) {
 				$this->doDir($ppath);
 			}
-			if(is_writable($ppath))
+			if (is_writable($ppath))
 				mkdir($path);
 			else
 				echo '<p>目录：' . $ppath . ' 没有写权限</p>';

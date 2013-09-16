@@ -1,10 +1,10 @@
 <?php
 
-class Template extends Smarty{
+class Template extends Smarty {
 
 	protected $id = null;
 
-	function __construct(){
+	function __construct() {
 		$this->id = md5($_SERVER['REQUEST_URI']); //建立页面的ID
 
 		$this->left_delimiter = C('TPL_L_TAG');  //模板文件中使用的“左”分隔符号
@@ -19,33 +19,33 @@ class Template extends Smarty{
 		parent::__construct();
 	}
 
-	function display($resource_name = null,$cache_id = null,$compile_id = null){
-		if(is_null($resource_name)){
+	function display($resource_name = null, $cache_id = null, $compile_id = null) {
+		if (is_null($resource_name)) {
 			$resource_name = "{$_GET["m"]}/{$_GET["a"]}" . C('TPL_SUFFIX');
-		}else if(strstr($resource_name,"/")){
+		} else if (strstr($resource_name, "/")) {
 			$resource_name = $resource_name . C('TPL_SUFFIX');
-		}else{
+		} else {
 			$resource_name = $_GET["m"] . "/" . $resource_name . C('TPL_SUFFIX');
 		}
-		$tplpath = rtrim(C('TPL_DIR'),'/') . '/' . $resource_name;
-		if(!file_exists($tplpath)){
-			if(C('DEBUG'))
+		$tplpath = rtrim(C('TPL_DIR'), '/') . '/' . $resource_name;
+		if (!file_exists($tplpath)) {
+			if (C('DEBUG'))
 				Debug::addmsg("<font style='color:red'>当前访问的模板文件：  $tplpath 不存在</font>");
 			else
 				$this->error('抱歉, 访问的页面不存在！');
-		}else{
-			if(C('DEBUG')){
+		}else {
+			if (C('DEBUG')) {
 				Debug::addmsg("当前访问的模板文件： $tplpath");
 			}
 			//预定义目录
-			$root = rtrim(substr(C('PRO_PATH'),strlen(rtrim($_SERVER["DOCUMENT_ROOT"],"/\\"))),'/\\');
-			$resource = rtrim(dirname($_SERVER["SCRIPT_NAME"]),"/\\") . '/' . ltrim(C('APP_PATH'),'./') . "/View/" . C('TPL_STYLE') . "/Resource/";
+			$root = rtrim(substr(C('PRO_PATH'), strlen(rtrim($_SERVER["DOCUMENT_ROOT"], "/\\"))), '/\\');
+			$resource = rtrim(dirname($_SERVER["SCRIPT_NAME"]), "/\\") . '/' . ltrim(C('APP_PATH'), './') . "/View/" . C('TPL_STYLE') . "/Resource/";
 			$url = $_SERVER['SCRIPT_NAME'] . '/' . $_GET['m'];
-			$this->assign('root',$root);
-			$this->assign('public',$root . '/Public');
-			$this->assign('res',$resource);
-			$this->assign('url',$url);
-			parent::display($resource_name,$cache_id,$compile_id);
+			$this->assign('root', $root);
+			$this->assign('public', $root . '/Public');
+			$this->assign('res', $resource);
+			$this->assign('url', $url);
+			parent::display($resource_name, $cache_id, $compile_id);
 		}
 	}
 
