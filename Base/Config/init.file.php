@@ -11,6 +11,7 @@ $config_null = <<<confignull
     );
 confignull;
 $config_str = <<<config
+<?php
 //项目配置文件（自动生成）
 return array(
 
@@ -38,28 +39,44 @@ return array(
     'TPL_ERROR' 		=> 'Public/error',		//操作失败的提示页
 );
 config;
-$func = <<<func
+$function = <<<function
 <?php
-     //应用下的公共函数库文件（自动生成)
-func;
+
+/**
+ * 公共函数库文件（自动生成)
+ */
+function;
 $index_str = <<<index
 <?php
 
-//Index模块（自动生成）
+/**
+ * Index模块 [框架初始化]
+ * @category Index
+ * @package Index
+ * @subpackage Action
+ * @author Anyon Zou <anyon@cxphp.cn>
+ */
 class IndexAction extends Action {
-    function init(){
-        //默认执行的方法
-    }
 
-    function index() {
-        echo '<h2>欢迎使用 CXPHP 框架（晨星PHP框架） 1.1 2013-06-06</h2>';
-        echo '<hr />';
-        echo '<p>本程序属于自由开源软件，任何人可对此程序做修改，无需承担任何责任！</p>';
-        echo '<hr />';
-        echo '<p>【作者】 Anyon </p>';
-        echo '<p>【Email】anyon@139.com  【Weibo】http://weibo.com/anyons</p>';
-        echo '<hr />';
-    }
+	/**
+	 * 框架初始化方法
+	 */
+	function init() {
+		//默认执行的方法
+	}
+
+	/**
+	 * 模块默认访问方法
+	 */
+	function index() {
+		echo '<h2>欢迎使用 CXPHP 框架（晨星PHP框架） 1.1 2013-09-16</h2>';
+		echo '<hr />';
+		echo '<p>本程序属于自由开源软件，任何人可对此程序做修改，无需承担任何责任！</p>';
+		echo '<hr />';
+		echo '<p>【作者】 Anyon </p>';
+		echo '<p>【Email】anyon@139.com  【Weibo】http://weibo.com/anyons</p>';
+		echo '<hr />';
+	}
 
 }
 index;
@@ -69,7 +86,7 @@ return array(
 	C('APP_PATH') . '/Action/IndexAction.class.php' => $index_str,
 	C('RUN_PATH') . '/CXPHP_LOCK_FILE' => '已经缓存PHP文件',
 	C('APP_PATH') . '/config.php' => $config_null,
-	C('APP_PATH') . '/Common/function.inc.php' => $func,
+	C('APP_PATH') . '/Common/function.inc.php' => $function,
 	C('APP_PATH') . '/View/' . C('TPL_STYLE') . '/Public/success' . C('TPL_SUFFIX') => file_get_contents(C('CXPHP') . '/Common/file_success'),
 	C('APP_PATH') . '/View/' . C('TPL_STYLE') . '/Public/error' . C('TPL_SUFFIX') => file_get_contents(C('CXPHP') . '/Common/file_error'),
 );
