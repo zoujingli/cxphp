@@ -14,8 +14,9 @@ abstract class Db {
 	 * 用来获取表名
 	 */
 	public function __get($pro) {
-		if ($pro == "tabName")
+		if ($pro == "tabName") {
 			return $this->tabName;
+		}
 	}
 
 	/**

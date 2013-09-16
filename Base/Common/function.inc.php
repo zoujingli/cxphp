@@ -140,3 +140,7 @@ function M($name = '', $app = '') {
 		return $db_class;
 	}
 }
+
+function toSize($size) {
+	return $size;
+}

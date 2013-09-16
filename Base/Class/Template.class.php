@@ -15,7 +15,6 @@ class Template extends Smarty {
 		$this->cache_dir = C('TPL_CACHE_DIR');   //设置缓存的目录
 		$this->cache_lifetime = C('TPL_CACHE_TIME'); //设置缓存的时间 
 		$this->debugging = false;
-
 		parent::__construct();
 	}
 

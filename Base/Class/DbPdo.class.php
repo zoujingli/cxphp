@@ -2,24 +2,27 @@
 
 class DbPdo extends Db {
 
-	static $pdo = null;
+	/**
+	 * 数据库链接对象
+	 * @var type 
+	 */
+	static $pdo_connect = null;
 
 	/**
 	 * 获取数据库连接对象PDO
 	 */
-	static function connect() {
-		if (is_null(self::$pdo)) {
+	static public function connect() {
+		if (is_null(self::$pdo_connect)) {
 			try {
 				$dsn = "mysql:host=" . C('DB_HOST') . ";dbname=" . C('DB_NAME');
 				$pdo = new PDO($dsn, C('DB_USER'), C('DB_PWD'), array(PDO::ATTR_PERSISTENT => true));
 				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				self::$pdo = $pdo;
-				return $pdo;
+				return self::$pdo_connect = $pdo;
 			} catch (PDOException $e) {
-				echo "连接数库失败：" . $e->getMessage();
+				die("连接数库失败：" . $e->getMessage());
 			}
 		} else {
-			return self::$pdo;
+			return self::$pdo_connect;
 		}
 	}
 

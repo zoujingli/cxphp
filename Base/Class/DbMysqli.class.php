@@ -270,8 +270,9 @@ class DbMysqli extends Db {
 		$mysqli = self::connect();
 		$result = $mysqli->query($sql);
 		$size = 0;
-		while ($row = $result->fetch_assoc())
+		while ($row = $result->fetch_assoc()) {
 			$size += $row["Data_length"] + $row["Index_length"];
+		}
 		return tosize($size);
 	}
 
