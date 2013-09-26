@@ -26,13 +26,13 @@ defined('TPL_STYLE') or define('TPL_STYLE', 'Default');
 //开启DUBGE调试(默认开启)
 defined('DEBUG') or define('DEBUG', true);
 //载入系统函数库
-require CXPHP . '/Common/function.inc.php';
+require CXPHP . '/Common/function.php';
 //载入配置文件并应用配置
-C(require CXPHP . '/Config/base.config.php');
-C(include C('PRO_PATH') . '/config.php');
-C(include C('APP_PATH') . '/config.php');
+C(load(CXPHP . '/Config/base.config.php'));
+C(load(C('PRO_PATH') . '/config.php'));
+C(load(C('APP_PATH') . '/config.php'));
 //导入用户自定义函数库
-include C('APP_PATH') . '/Common/function.inc.php';
+load(C('APP_PATH') . '/Common/function.inc.php');
 //设置系统自动加载的目录
 set_include_path(get_include_path() . PATH_SEPARATOR . join(PATH_SEPARATOR, C('AUTO_PATH')));
 //执行相关的操作
