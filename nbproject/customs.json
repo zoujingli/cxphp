@@ -1,0 +1,22 @@
+{
+	"attributes": {},
+	"elements": {
+		"foreach": {
+			"attributes": {
+				"name": {},
+				"item": {}
+			}
+		},
+		"style": {},
+		"extend": {
+			"attributes": {
+				"name": {}
+			}
+		},
+		"include": {
+			"attributes": {
+				"file": {}
+			}
+		}
+	}
+}

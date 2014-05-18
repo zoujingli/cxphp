@@ -1,0 +1,32 @@
+<!-- JavaScript -->
+<script type="text/javascript" src="__STATIC__/resource/js/jquery.js" ></script>
+<script type="text/javascript" src="__STATIC__/resource/assets/bootstrap/js/bootstrap.min.js" ></script>
+<script type="text/javascript" src="__STATIC__/resource/js/modernizr.custom.js" ></script>
+<script type="text/javascript" src="__STATIC__/resource/js/jquery.mousewheel-3.0.6.pack.js" ></script>
+<script type="text/javascript" src="__STATIC__/resource/js/jquery.cookie.js" ></script>
+<script type="text/javascript" src="__STATIC__/resource/js/jquery.easing.js" ></script>
+
+<!--[if lt IE 9]>
+    <script src="__STATIC__/resource/js/html5shiv.js" ></script>
+    <script src="__STATIC__/resource/js/respond.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="__STATIC__/resource/assets/hover-dropdown/bootstrap-hover-dropdown.min.js" ></script>
+<!-- <script type="text/javascript" src="__STATIC__/resource/assets/masonry/masonry.js" ></script> -->
+<script type="text/javascript" src="__STATIC__/resource/assets/page-scroller/jquery.ui.totop.min.js" ></script>
+<script type="text/javascript" src="__STATIC__/resource/assets/mixitup/jquery.mixitup.js" ></script>
+<script type="text/javascript" src="__STATIC__/resource/assets/mixitup/jquery.mixitup.init.js" ></script>
+<script type="text/javascript" src="__STATIC__/resource/assets/fancybox/jquery.fancybox.pack.js" ></script>
+<script type="text/javascript" src="__STATIC__/resource/assets/easy-pie-chart/jquery.easypiechart.js" ></script>
+<script type="text/javascript" src="__STATIC__/resource/assets/waypoints/waypoints.min.js" ></script>
+<script type="text/javascript" src="__STATIC__/resource/js/jquery.wp.custom.js" ></script>
+{$site_tongji}
+
+<script type="text/javascript">
+	$(function() {
+		$("#main_nav a").each(function() {
+			if ($(this)[0].href === String(window.location)) {
+				$(this).parentsUntil("#main_nav>ul").addClass("active");
+			}
+		});
+	});
+</script>
