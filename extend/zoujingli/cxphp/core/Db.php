@@ -40,6 +40,7 @@ class Db extends DbManager
     public function __construct(App $app)
     {
         $this->app = $app;
+        $this->setLog($this->app->logger->getDriver());
         $this->setCache($this->app->cache->getDriver());
         $this->setConfig($this->app->config->get('database'));
         parent::__construct();

@@ -110,9 +110,7 @@ abstract class Driver implements CacheInterface
      */
     protected function serialize($data): string
     {
-        if (is_numeric($data)) return (string)$data;
-        $serialize = $this->options['serialize'][0] ?? "serialize";
-        return $serialize($data);
+        return serialize($data);
     }
 
     /**
@@ -122,9 +120,7 @@ abstract class Driver implements CacheInterface
      */
     protected function unserialize(string $data)
     {
-        if (is_numeric($data)) return $data;
-        $unserialize = $this->options['serialize'][1] ?? "unserialize";
-        return $unserialize($data);
+        return unserialize($data);
     }
 
     /**

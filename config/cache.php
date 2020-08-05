@@ -23,15 +23,13 @@ return [
     'channel' => [
         'file' => [
             // 驱动方式
-            'type'      => 'File',
+            'type'   => 'File',
             // 缓存保存目录
-            'path'      => App::$instance->getRuntimePath() . 'cache' . DIRECTORY_SEPARATOR,
+            'path'   => App::$instance->getRuntimePath() . 'cache' . DIRECTORY_SEPARATOR,
             // 缓存名称前缀
-            'prefix'    => '',
+            'prefix' => '',
             // 缓存有效期 0 表示永久缓存
-            'expire'    => 0,
-            // 序列化机制
-            'serialize' => [],
+            'expire' => 0,
         ],
     ],
 ];

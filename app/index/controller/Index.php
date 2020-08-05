@@ -10,6 +10,6 @@ class Index
     public function index(Request $request)
     {
         echo '<pre>';
-        print_r(App::$instance->db->name('SystemUser')->cache(true)->select()->toArray());
+        print_r(App::$instance->db->name('SystemUser')->cache(false)->select()->toArray());
     }
 }

@@ -19,13 +19,14 @@ declare (strict_types=1);
 namespace cxphp\core\logger;
 
 use cxphp\core\Exception;
+use Psr\Log\LoggerInterface;
 
 /**
  * 日志驱动接口
  * Class Driver
  * @package cxphp\logger
  */
-abstract class Driver
+abstract class Driver implements LoggerInterface
 {
     /**
      * 记录 emergency 信息
