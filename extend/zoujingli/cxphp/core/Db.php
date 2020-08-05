@@ -35,10 +35,12 @@ class Db extends DbManager
     /**
      * Db constructor.
      * @param App $app
+     * @throws Exception
      */
     public function __construct(App $app)
     {
         $this->app = $app;
+        $this->setCache($this->app->cache->getDriver());
         $this->setConfig($this->app->config->get('database'));
         parent::__construct();
     }

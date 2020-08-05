@@ -20,12 +20,15 @@ namespace cxphp\core\cache;
 
 use cxphp\core\App;
 use cxphp\core\Exception;
+use Psr\SimpleCache\CacheInterface;
+use Psr\SimpleCache\InvalidArgumentException;
 
 /**
+ * 缓存驱动接口
  * Class Driver
  * @package cxphp\cache
  */
-abstract class Driver
+abstract class Driver implements CacheInterface
 {
     /**
      * @var App
@@ -87,6 +90,7 @@ abstract class Driver
      * @param mixed $value 存储数据
      * @return bool
      * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function push(string $name, $value): bool
     {
@@ -143,14 +147,70 @@ abstract class Driver
         return call_user_func_array([$this->handler, $method], $args);
     }
 
+    /**
+     * 读取缓存
+     * @access public
+     * @param iterable $keys 缓存变量名
+     * @param mixed $default 默认值
+     * @return iterable
+     * @throws InvalidArgumentException
+     */
+    public function getMultiple($keys, $default = null): iterable
+    {
+        $result = [];
+
+        foreach ($keys as $key) {
+            $result[$key] = $this->get($key, $default);
+        }
+
+        return $result;
+    }
+
+    /**
+     * 写入缓存
+     * @access public
+     * @param iterable $values 缓存数据
+     * @param null|int|\DateInterval $ttl 有效时间 0为永久
+     * @return bool
+     * @throws InvalidArgumentException
+     */
+    public function setMultiple($values, $ttl = null): bool
+    {
+        foreach ($values as $key => $val) {
+            $result = $this->set($key, $val, $ttl);
+            if (false === $result) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 删除缓存
+     * @access public
+     * @param iterable $keys 缓存变量名
+     * @return bool
+     * @throws InvalidArgumentException
+     */
+    public function deleteMultiple($keys): bool
+    {
+        foreach ($keys as $key) {
+            $result = $this->delete($key);
+            if (false === $result) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     abstract public function has($name): bool;
+
+    abstract public function clear(): bool;
+
+    abstract public function delete($name): bool;
 
     abstract public function get($name, $default = null);
 
     abstract public function set($name, $value, $expire = null): bool;
-
-    abstract public function delete($name): bool;
-
-    abstract public function clear(): bool;
 
 }

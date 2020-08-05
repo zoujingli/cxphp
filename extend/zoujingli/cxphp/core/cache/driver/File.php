@@ -20,6 +20,7 @@ namespace cxphp\core\cache\driver;
 
 use cxphp\core\App;
 use cxphp\core\cache\Driver;
+use Psr\SimpleCache\CacheInterface;
 
 /**
  * 文件缓存类
@@ -196,5 +197,4 @@ class File extends Driver
         @rmdir($dirname);
         return true;
     }
-
 }

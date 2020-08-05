@@ -2,6 +2,7 @@
 
 namespace app\index\controller;
 
+use cxphp\core\App;
 use cxphp\http\Request;
 
 class Index
@@ -9,11 +10,6 @@ class Index
     public function index(Request $request)
     {
         echo '<pre>';
-        dump($request->get());
-        dump($request->path());
-        echo '</pre>';
-        echo '<script>setInterval(function(){
-    location.reload();
-},100)</script>';
+        print_r(App::$instance->db->name('SystemUser')->cache(true)->select()->toArray());
     }
 }
