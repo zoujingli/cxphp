@@ -28,20 +28,13 @@ use cxphp\core\logger\Driver;
  */
 class File extends Driver
 {
-    /**
-     * 配置参数
-     * @var array
-     */
+    /** @var array */
     protected $config = [
-        'time_format'  => 'c',
-        'single'       => false,
-        'file_size'    => 2097152,
-        'path'         => '',
-        'apart_level'  => [],
-        'max_files'    => 0,
-        'json'         => false,
-        'json_options' => JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
-        'format'       => '[%s][%s] %s',
+        'max_files'   => 0,
+        'log_level'   => [],
+        'log_format'  => '[%s][%s] %s',
+        'file_path'   => '',
+        'time_format' => 'Y-m-d H:i:s',
     ];
 
     /**
@@ -54,15 +47,16 @@ class File extends Driver
         if (is_array($config)) {
             $this->config = array_merge($this->config, $config);
         }
-        if (empty($this->config['format'])) {
-            $this->config['format'] = '[%s][%s] %s';
+        if (empty($this->config['log_format'])) {
+            $this->config['log_format'] = '[%s][%s] %s';
         }
-        if (empty($this->config['path'])) {
-            $this->config['path'] = $app->getRuntimePath('logger');
+        if (empty($this->config['time_format'])) {
+            $this->config['time_format'] = 'Y-m-d H:i:s';
         }
-        if (substr($this->config['path'], -1) != DIRECTORY_SEPARATOR) {
-            $this->config['path'] .= DIRECTORY_SEPARATOR;
+        if (empty($this->config['file_path'])) {
+            $this->config['file_path'] = $app->getRuntimePath('logger');
         }
+        $this->config['file_path'] = rtrim($this->config['file_path'], '\\/') . DIRECTORY_SEPARATOR;
     }
 
     /**
@@ -72,78 +66,48 @@ class File extends Driver
      */
     public function save(array $record): bool
     {
-        $destination = $this->getMasterLogFile();
-        $path = dirname($destination);
-        !is_dir($path) && mkdir($path, 0755, true);
-        $info = [];
-        // 日志信息封装
-        $time = \DateTime::createFromFormat('0.u00 U', microtime())->setTimezone(new \DateTimeZone(date_default_timezone_get()))->format($this->config['time_format']);
+        $realpath = dirname($destination = $this->getMasterLogFile());
+        file_exists($realpath) && is_dir($realpath) || mkdir($realpath, 0755, true);
+        [$records, $datetime] = [[], date($this->config['time_format'], time())];
         foreach ($record as $type => $val) {
             $message = [];
             foreach ($val as $msg) {
-                if (!is_string($msg)) {
-                    $msg = var_export($msg, true);
-                }
-                if ($this->config['json']) {
-                    $message[] = json_encode(['time' => $time, 'type' => $type, 'msg' => $msg], $this->config['json_options']);
-                } else {
-                    $message[] = sprintf($this->config['format'], $time, $type, $msg);
-                }
+                $message[] = sprintf($this->config['log_format'], $datetime, $type, is_string($msg) ? $msg : var_export($msg, true));
             }
-            if (true === $this->config['apart_level'] || in_array($type, $this->config['apart_level'])) {
-                // 独立记录的日志级别
-                $filename = $this->getApartLevelFile($path, $type);
-                $this->write($message, $filename);
+            if (true === $this->config['log_level'] || in_array($type, $this->config['log_level'])) {
+                $this->write($message, $this->getApartLevelFile($realpath, $type));
                 continue;
             }
-            $info[$type] = $message;
+            $records[$type] = $message;
         }
-        return $info ? $this->write($info, $destination) : true;
+        return $records ? $this->write($records, $destination) : true;
     }
 
     /**
      * 日志写入
-     * @param array $message 日志信息
+     * @param array $records 日志信息
      * @param string $destination 日志文件
      * @return bool
      */
-    protected function write(array $message, string $destination): bool
+    private function write(array $records, string $destination): bool
     {
-        $info = [];
-        $this->checkLogSize($destination);
-        foreach ($message as $type => $msg) {
-            $info[$type] = is_array($msg) ? implode(PHP_EOL, $msg) : $msg;
-        }
-        return error_log(implode(PHP_EOL, $info) . PHP_EOL, 3, $destination);
+        foreach ($records as &$vo) $vo = is_array($vo) ? implode(PHP_EOL, $vo) : $vo;
+        return error_log(implode(PHP_EOL, $records) . PHP_EOL, 3, $destination);
     }
 
     /**
      * 获取主日志文件名
      * @return string
      */
-    protected function getMasterLogFile(): string
+    private function getMasterLogFile(): string
     {
-        if ($this->config['max_files']) {
-            $files = glob($this->config['path'] . '*.log');
-            try {
-                if (count($files) > $this->config['max_files']) {
-                    unlink($files[0]);
-                }
-            } catch (\Exception $exception) {
-            }
-        }
-        if ($this->config['single']) {
-            $name = is_string($this->config['single']) ? $this->config['single'] : 'single';
-            $destination = $this->config['path'] . $name . '.log';
+        if ($this->config['max_files'] > 0) {
+            $files = glob($this->config['file_path'] . '*.log');
+            if (count($files) > $this->config['max_files']) @unlink($files[0]);
+            return $this->config['file_path'] . date('Ymd') . '.log';
         } else {
-            if ($this->config['max_files']) {
-                $filename = date('Ymd') . '.log';
-            } else {
-                $filename = date('Ym') . DIRECTORY_SEPARATOR . date('d') . '.log';
-            }
-            $destination = $this->config['path'] . $filename;
+            return $this->config['file_path'] . date('Ym') . DIRECTORY_SEPARATOR . date('d') . '.log';
         }
-        return $destination;
     }
 
     /**
@@ -152,30 +116,12 @@ class File extends Driver
      * @param string $type 日志类型
      * @return string
      */
-    protected function getApartLevelFile(string $path, string $type): string
+    private function getApartLevelFile(string $path, string $type): string
     {
-        if ($this->config['single']) {
-            $name = is_string($this->config['single']) ? $this->config['single'] : 'single';
-            $name .= '_' . $type;
-        } elseif ($this->config['max_files']) {
-            $name = date('Ymd') . '_' . $type;
+        if ($this->config['max_files'] > 0) {
+            return $path . DIRECTORY_SEPARATOR . date('Ymd') . '_' . $type . '.log';
         } else {
-            $name = date('d') . '_' . $type;
-        }
-        return $path . DIRECTORY_SEPARATOR . $name . '.log';
-    }
-
-    /**
-     * 检查日志文件大小并自动生成备份文件
-     * @param string $destination 日志文件
-     */
-    protected function checkLogSize(string $destination): void
-    {
-        if (is_file($destination) && floor($this->config['file_size']) <= filesize($destination)) {
-            try {
-                rename($destination, dirname($destination) . DIRECTORY_SEPARATOR . time() . '-' . basename($destination));
-            } catch (\Exception $exception) {
-            }
+            return $path . DIRECTORY_SEPARATOR . date('d') . '_' . $type . '.log';
         }
     }
 }

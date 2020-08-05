@@ -18,7 +18,6 @@ declare (strict_types=1);
 
 namespace cxphp\core\logger;
 
-use cxphp\core\Exception;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -31,8 +30,7 @@ abstract class Driver implements LoggerInterface
     /**
      * 记录 emergency 信息
      * @param mixed $message 日志信息
-     * @param array $context 替换内容
-     * @throws Exception
+     * @param array $context 日志内容
      */
     public function emergency($message, array $context = [])
     {
@@ -42,8 +40,7 @@ abstract class Driver implements LoggerInterface
     /**
      * 记录警报信息
      * @param mixed $message 日志信息
-     * @param array $context 替换内容
-     * @throws Exception
+     * @param array $context 日志内容
      */
     public function alert($message, array $context = []): void
     {
@@ -53,8 +50,7 @@ abstract class Driver implements LoggerInterface
     /**
      * 记录紧急情况
      * @param mixed $message 日志信息
-     * @param array $context 替换内容
-     * @throws Exception
+     * @param array $context 日志内容
      */
     public function critical($message, array $context = []): void
     {
@@ -64,8 +60,7 @@ abstract class Driver implements LoggerInterface
     /**
      * 记录错误信息
      * @param mixed $message 日志信息
-     * @param array $context 替换内容
-     * @throws Exception
+     * @param array $context 日志内容
      */
     public function error($message, array $context = []): void
     {
@@ -75,8 +70,7 @@ abstract class Driver implements LoggerInterface
     /**
      * 记录warning信息
      * @param mixed $message 日志信息
-     * @param array $context 替换内容
-     * @throws Exception
+     * @param array $context 日志内容
      */
     public function warning($message, array $context = []): void
     {
@@ -86,8 +80,7 @@ abstract class Driver implements LoggerInterface
     /**
      * 记录notice信息
      * @param mixed $message 日志信息
-     * @param array $context 替换内容
-     * @throws Exception
+     * @param array $context 日志内容
      */
     public function notice($message, array $context = []): void
     {
@@ -97,8 +90,7 @@ abstract class Driver implements LoggerInterface
     /**
      * 记录一般信息
      * @param mixed $message 日志信息
-     * @param array $context 替换内容
-     * @throws Exception
+     * @param array $context 日志内容
      */
     public function info($message, array $context = []): void
     {
@@ -108,8 +100,7 @@ abstract class Driver implements LoggerInterface
     /**
      * 记录调试信息
      * @param mixed $message 日志信息
-     * @param array $context 替换内容
-     * @throws Exception
+     * @param array $context 日志内容
      */
     public function debug($message, array $context = []): void
     {
@@ -119,8 +110,7 @@ abstract class Driver implements LoggerInterface
     /**
      * 记录 sql 信息
      * @param mixed $message 日志信息
-     * @param array $context 替换内容
-     * @throws Exception
+     * @param array $context 日志内容
      */
     public function sql($message, array $context = []): void
     {
@@ -131,8 +121,7 @@ abstract class Driver implements LoggerInterface
      * 记录日志信息
      * @param string $level 日志级别
      * @param mixed $message 日志信息
-     * @param array $context 替换内容
-     * @throws Exception
+     * @param array $context 日志内容
      */
     public function log($level, $message, array $context = [])
     {
@@ -143,9 +132,8 @@ abstract class Driver implements LoggerInterface
      * 记录日志信息
      * @param mixed $message 日志信息
      * @param string $type 日志级别
-     * @param array $context 替换内容
+     * @param array $context 日志内容
      * @return $this
-     * @throws Exception
      */
     public function record($message, string $type = 'info', array $context = [])
     {
