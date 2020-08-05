@@ -1,0 +1,32 @@
+{
+  "name": "zoujingli/cxphp",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Anyon",
+      "email": "email@example.com"
+    }
+  ],
+  "autoload": {
+    "files": [
+      "extend/zoujingli/cxphp/helper.php"
+    ],
+    "psr-4": {
+      "app\\": "app",
+      "cxphp\\": "extend/zoujingli/cxphp"
+    }
+  },
+  "require": {
+    "php": ">=7.1.0",
+    "ext-json": "*",
+    "ext-mbstring": "*",
+    "psr/log": "^1.1",
+    "league/flysystem": "^1.0",
+    "league/flysystem-cached-adapter": "^1.0",
+    "workerman/workerman": "^4.0",
+    "topthink/think-template": "^2.0",
+    "topthink/think-orm": "^2.0"
+  }
+}
