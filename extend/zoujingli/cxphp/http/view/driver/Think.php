@@ -36,8 +36,9 @@ class Think extends Driver
     protected function initialize()
     {
         $this->config['view_path'] = $this->config['view_path'] ?? $this->app->getAppPath();
-        $this->config['cache_path'] = $this->config['cache_path'] ?? $this->app->getRuntimePath('temp') . DIRECTORY_SEPARATOR;
         $this->config['view_suffix'] = $this->config['view_suffix'] ?? 'html';
+        $this->config['cache_path'] = $this->config['cache_path'] ?? $this->app->getRuntimePath('temp') . DIRECTORY_SEPARATOR;
+        $this->config['cache_suffix'] = $this->config['cache_suffix'] ?? 'php';
         $this->view = $this->view ?: new Template($this->config);
     }
 
