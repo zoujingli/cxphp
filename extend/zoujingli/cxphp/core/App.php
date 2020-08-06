@@ -20,11 +20,13 @@ namespace cxphp\core;
 
 use cxphp\http\Request;
 use cxphp\http\Response;
+use cxphp\http\View;
 
 /**
  * App 基础类
  * @property Db $db
  * @property Lang $lang
+ * @property View $view
  * @property Cache $cache
  * @property Event $event
  * @property Httpd $httpd
@@ -48,6 +50,7 @@ class App
         'db'         => Db::class,
         'app'        => App::class,
         'lang'       => Lang::class,
+        'view'       => View::class,
         'cache'      => Cache::class,
         'event'      => Event::class,
         'httpd'      => Httpd::class,
@@ -82,7 +85,7 @@ class App
      * 当前应用实例对象
      * @var static
      */
-    public static $instance;
+    public static $object;
 
     /**
      * App constructor.
@@ -117,18 +120,18 @@ class App
      */
     public static function run($listen = false)
     {
-        if (is_null(self::$instance)) {
-            static::$instance = new static;
+        if (is_null(self::$object)) {
+            static::$object = new static;
             // 设置系统默认时区
-            if ($timezone = static::$instance->config->get('app.default_timezone')) {
+            if ($timezone = static::$object->config->get('app.default_timezone')) {
                 date_default_timezone_set($timezone);
             }
             // 初始化 Worker 服务
             if ($listen) {
-                static::$instance->httpd->start();
+                static::$object->httpd->start();
             }
         }
-        return static::$instance;
+        return static::$object;
     }
 
     /**

@@ -21,7 +21,7 @@ return [
     'channel' => [
         'file'  => [
             'session_name' => 'PHPSID',
-            'session_path' => App::$instance->getRuntimePath() . 'session',
+            'session_path' => App::$object->getRuntimePath() . 'session',
         ],
         'redis' => [
             'host'         => '127.0.0.1',

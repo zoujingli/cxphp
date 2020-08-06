@@ -19,7 +19,6 @@ declare (strict_types=1);
 namespace cxphp\http;
 
 use cxphp\http\request\UploadFile;
-use Workerman\Connection\TcpConnection;
 
 /**
  * 当前请求对象

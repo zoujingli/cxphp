@@ -95,7 +95,6 @@ class Httpd
             $this->app->config->reload();
             Http::requestClass(Request::class);
             $worker->onMessage = function (TcpConnection $connection, Request $request) {
-                $request->connection = $connection;
                 $this->app->instance('request', $request);
                 $this->app->instance('response', Response::make());
                 static $requestCount = 0;

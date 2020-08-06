@@ -37,7 +37,7 @@ class Response extends \Workerman\Protocols\Http\Response
     public static function make()
     {
         $static = new static;
-        $static->app = App::$instance;
+        $static->app = App::$object;
         return $static;
     }
 

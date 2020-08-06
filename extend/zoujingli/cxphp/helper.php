@@ -29,7 +29,7 @@ if (!function_exists('app')) {
      */
     function app(string $name = '', array $args = [], bool $newInstance = false)
     {
-        return App::$instance->make($name ?: App::class, $args, $newInstance);
+        return App::$object->make($name ?: App::class, $args, $newInstance);
     }
 }
 
