@@ -24,7 +24,7 @@ return [
             'file_path'   => '',
             // 日志日期格式
             'time_format' => 'Y-m-d H:i:s',
-            // 最大日志文件数量
+            // 日志文件数量
             'max_files'   => 10,
             // 独立日志级别
             'log_level'   => ['error', 'sql'],

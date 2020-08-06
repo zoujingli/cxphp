@@ -22,7 +22,7 @@ namespace cxphp\core;
  * 系统日志管理
  * Class Logger
  * @package cxphp\core
- * @mixin \cxphp\core\logger\Driver\File
+ * @mixin \cxphp\core\logger\driver\File
  */
 class Logger extends Manager
 {
