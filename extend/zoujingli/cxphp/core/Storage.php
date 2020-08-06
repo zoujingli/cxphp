@@ -57,7 +57,9 @@ class Storage extends Manager
      */
     protected function createAdapter(array $config): AdapterInterface
     {
-        if (is_callable($config['adapter'])) {
+        if ($config['adapter'] instanceof AdapterInterface) {
+            return $config['adapter'];
+        } elseif (is_callable($config['adapter'])) {
             return $this->app->invokeFunction($config['adapter']);
         } else {
             throw new Exception("Storage Adapter Not Found.");
