@@ -19,7 +19,6 @@ declare (strict_types=1);
 namespace cxphp\http\view;
 
 use cxphp\core\App;
-use cxphp\http\Request;
 
 /**
  * 视图驱动接口
@@ -34,9 +33,6 @@ abstract class Driver
     /** @var array */
     protected $config;
 
-    /** @var Request */
-    protected $request;
-
     /**
      * Driver constructor.
      * @param App $app
@@ -46,15 +42,16 @@ abstract class Driver
     {
         $this->app = $app;
         $this->config = $config;
-        if (method_exists($this, 'initialize')) $this->initialize();
+        if (method_exists($this, 'initialize')) {
+            $this->initialize();
+        }
     }
 
     /**
      * 渲染模板文件
-     * @param string $tpl 模板文件
+     * @param string $name 模板文件
      * @param array $data 模板变量
-     * @param Request|null $request
      */
-    abstract public function fetch(string $tpl, array $data = [], Request $request = null);
+    abstract public function fetch(string $name, array $data = []);
 
 }

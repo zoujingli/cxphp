@@ -106,7 +106,7 @@ class Response extends \Workerman\Protocols\Http\Response
      */
     public function view($tpl, $vars = [])
     {
-        $this->_body = $this->app->make(View::class)->fetch($tpl, $vars, $this->app->request);
+        $this->_body = $this->app->make(View::class)->fetch($tpl, $vars);
         return $this;
     }
 

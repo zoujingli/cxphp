@@ -19,7 +19,6 @@ declare (strict_types=1);
 namespace cxphp\http\view\driver;
 
 use cxphp\core\Exception;
-use cxphp\http\Request;
 use cxphp\http\view\Driver;
 use think\Template;
 
@@ -34,7 +33,6 @@ class Think extends Driver
      */
     protected $view;
 
-
     protected function initialize()
     {
         $this->config['view_path'] = $this->config['view_path'] ?? $this->app->getAppPath();
@@ -43,6 +41,12 @@ class Think extends Driver
         $this->view = $this->view ?: new Template($this->config);
     }
 
+    /**
+     * 解析模板文件
+     * @param string $name 模板名称
+     * @return string
+     * @throws Exception
+     */
     protected function parseTemplate($name)
     {
         if (stripos($name, '.' . $this->config['view_suffix']) == false) {
@@ -55,11 +59,11 @@ class Think extends Driver
             [$module, $file] = explode('@', $name);
             $temp = "{$module}/view/{$file}";
         } elseif ($name === '.' . $this->config['view_suffix']) {
-            $temp = $this->request->module . '/view/' . strtr($this->request->realpath, '.', '/') . '/' . strtolower($this->request->action) . $name;
+            $temp = $this->app->request->module . '/view/' . strtr($this->app->request->realpath, '.', '/') . '/' . strtolower($this->app->request->action) . $name;
         } elseif (substr_count($name, '/') === 0) {
-            $temp = $this->request->module . '/view/' . strtr($this->request->realpath, '.', '/') . '/' . $name;
+            $temp = $this->app->request->module . '/view/' . strtr($this->app->request->realpath, '.', '/') . '/' . $name;
         } elseif (substr_count($name, '/') === 1) {
-            $temp = $this->request->module . '/view/' . $name;
+            $temp = $this->app->request->module . '/view/' . $name;
         } else {
             $temp = $name;
         }
@@ -71,20 +75,17 @@ class Think extends Driver
         }
     }
 
-
     /**
      * 模板文件渲染
-     * @param string $tpl
-     * @param array $data
-     * @param Request $request
+     * @param string $name 模板文件
+     * @param array $data 模板变量
      * @return string
      * @throws Exception
      */
-    public function fetch(string $tpl, array $data = [], Request $request = null): string
+    public function fetch(string $name, array $data = []): string
     {
-        $this->request = $request;
         \ob_start();
-        $this->view->fetch($this->parseTemplate($tpl), $data);
+        $this->view->fetch($this->parseTemplate($name), $data);
         return \ob_get_clean();
     }
 
