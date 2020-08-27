@@ -16,8 +16,13 @@ declare (strict_types=1);
 // | github 代码仓库：https://github.com/zoujingli/cxphp
 // +----------------------------------------------------------------------
 
-use cxphp\App;
+namespace cxphp;
 
-require_once __DIR__ . '/vendor/autoload.php';
+/**
+ * Class Exception
+ * @package cxphp
+ */
+class Exception extends \Exception
+{
 
-App::run(true);
+}

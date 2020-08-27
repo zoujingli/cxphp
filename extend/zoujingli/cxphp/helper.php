@@ -16,7 +16,7 @@ declare (strict_types=1);
 // | github 代码仓库：https://github.com/zoujingli/cxphp
 // +----------------------------------------------------------------------
 
-use cxphp\core\App;
+use cxphp\App;
 
 if (!function_exists('app')) {
     /**
@@ -25,7 +25,7 @@ if (!function_exists('app')) {
      * @param array $args 参数
      * @param bool $newInstance 是否每次创建新的实例
      * @return object|App
-     * @throws \cxphp\core\Exception
+     * @throws \cxphp\Exception
      */
     function app(string $name = '', array $args = [], bool $newInstance = false)
     {
@@ -61,13 +61,13 @@ if (!function_exists('str_snake')) {
     /**
      * 驼峰转下划线
      * @param string $value
-     * @param string $delimiter
+     * @param string $separ
      * @return string
      */
-    function str_snake(string $value, string $delimiter = '_')
+    function str_snake(string $value, string $separ = '_')
     {
         $value = preg_replace('/\s+/u', '', $value);
-        return mb_strtolower(preg_replace('/(.)(?=[A-Z])/u', '$1' . $delimiter, $value), 'UTF-8');
+        return mb_strtolower(preg_replace('/(.)(?=[A-Z])/u', '$1' . $separ, $value), 'UTF-8');
     }
 }
 

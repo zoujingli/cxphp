@@ -16,8 +16,17 @@ declare (strict_types=1);
 // | github 代码仓库：https://github.com/zoujingli/cxphp
 // +----------------------------------------------------------------------
 
-use cxphp\App;
+namespace cxphp\httpd\session;
 
-require_once __DIR__ . '/vendor/autoload.php';
+/**
+ * Interface Driver
+ * @package cxphp\session
+ */
+interface Driver
+{
+    public function gc($maxlifetime);
 
-App::run(true);
+    public function destroy($session_id);
+
+    public function write($session_id, $session_data);
+}

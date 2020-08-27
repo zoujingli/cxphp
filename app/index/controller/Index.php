@@ -2,7 +2,7 @@
 
 namespace app\index\controller;
 
-use cxphp\core\httpd\Request;
+use cxphp\httpd\Request;
 
 class Index
 {

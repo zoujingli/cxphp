@@ -14,7 +14,7 @@
 // | github 代码仓库：https://github.com/zoujingli/cxphp
 // +----------------------------------------------------------------------
 
-use cxphp\core\App;
+use cxphp\App;
 
 return [
     // 默认缓存驱动

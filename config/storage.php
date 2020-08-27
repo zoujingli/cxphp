@@ -14,7 +14,7 @@
 // | github 代码仓库：https://github.com/zoujingli/cxphp
 // +----------------------------------------------------------------------
 
-use cxphp\core\App;
+use cxphp\App;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\AdapterInterface;
 

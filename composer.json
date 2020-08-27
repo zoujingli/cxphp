@@ -15,7 +15,7 @@
     ],
     "psr-4": {
       "app\\": "app",
-      "cxphp\\": "extend/zoujingli/cxphp"
+      "cxphp\\": "extend/zoujingli/cxphp/src"
     }
   },
   "require": {
