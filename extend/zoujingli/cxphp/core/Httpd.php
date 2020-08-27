@@ -143,7 +143,7 @@ class Httpd
         }
         \ob_start();
         $class = "app\\{$module}\\controller\\{$controller}";
-        $result = $this->app->invokeMethod([$class, $action], $args);
+        $result = $this->app->invokeMethod([$this->app->make($class), $action], $args);
         if ($result instanceof Response) {
             return $this->app->response->send();
         } elseif (is_string($result) || is_numeric($result)) {
