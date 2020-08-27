@@ -16,19 +16,15 @@ declare (strict_types=1);
 // | github 代码仓库：https://github.com/zoujingli/cxphp
 // +----------------------------------------------------------------------
 
-namespace cxphp\http;
+namespace cxphp\core\httpd\session\driver;
 
-use cxphp\core\Manager;
+use cxphp\core\httpd\session\Driver;
+use Workerman\Protocols\Http\Session\FileSessionHandler;
 
 /**
- * Class Session
- * @package cxphp
+ * Class File
+ * @package cxphp\session\driver
  */
-class Session extends Manager
+class File extends FileSessionHandler implements Driver
 {
-    /** @var string */
-    protected $ctype = 'session';
-
-    /** @var string */
-    protected $namespace = '\\cxphp\\http\\session\\driver\\';
 }

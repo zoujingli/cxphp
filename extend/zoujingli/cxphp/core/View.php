@@ -16,9 +16,7 @@ declare (strict_types=1);
 // | github 代码仓库：https://github.com/zoujingli/cxphp
 // +----------------------------------------------------------------------
 
-namespace cxphp\http;
-
-use cxphp\core\Manager;
+namespace cxphp\core;
 
 /**
  * 视图基类
@@ -34,7 +32,7 @@ class View extends Manager
     protected $ctype = 'view';
 
     /** @var string */
-    protected $namespace = '\\cxphp\\http\\view\\driver\\';
+    protected $namespace = '\\cxphp\\core\\view\\driver\\';
 
     /**
      * 模板变量赋值
@@ -54,15 +52,14 @@ class View extends Manager
 
     /**
      * 解析和获取模板内容 用于输出
-     * @param string $tpl 模板文件名或者内容
+     * @param string $tpl 模板文件
      * @param array $vars 模板变量
-     * @param Request $request
      * @return string
      * @throws \cxphp\core\Exception
      */
-    public function fetch(string $tpl = '', array $vars = [], Request $request = null): string
+    public function fetch(string $tpl = '', array $vars = []): string
     {
-        $coutent = $this->getDriver()->fetch($tpl, array_merge($this->data, $vars), $request);
+        $coutent = $this->getDriver()->fetch($tpl, array_merge($this->data, $vars));
         $this->data = [];
         return $coutent;
     }
@@ -85,7 +82,7 @@ class View extends Manager
      */
     public function __get($name)
     {
-        return $this->data[$name];
+        return $this->data[$name] ?? null;
     }
 
     /**

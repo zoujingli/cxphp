@@ -16,17 +16,19 @@ declare (strict_types=1);
 // | github 代码仓库：https://github.com/zoujingli/cxphp
 // +----------------------------------------------------------------------
 
-namespace cxphp\http\session;
+namespace cxphp\core\httpd;
+
+use cxphp\core\Manager;
 
 /**
- * Interface Driver
- * @package cxphp\session
+ * Class Session
+ * @package cxphp
  */
-interface Driver
+class Session extends Manager
 {
-    public function gc($maxlifetime);
+    /** @var string */
+    protected $ctype = 'session';
 
-    public function destroy($session_id);
-
-    public function write($session_id, $session_data);
+    /** @var string */
+    protected $namespace = '\\cxphp\\http\\session\\driver\\';
 }

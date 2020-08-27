@@ -16,9 +16,9 @@ declare (strict_types=1);
 // | github 代码仓库：https://github.com/zoujingli/cxphp
 // +----------------------------------------------------------------------
 
-namespace cxphp\http;
+namespace cxphp\core\httpd;
 
-use cxphp\http\request\UploadFile;
+use cxphp\core\httpd\request\UploadFile;
 
 /**
  * 当前请求对象

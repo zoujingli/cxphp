@@ -18,9 +18,8 @@ declare (strict_types=1);
 
 namespace cxphp\core;
 
-use cxphp\http\Request;
-use cxphp\http\Response;
-use cxphp\http\View;
+use cxphp\core\httpd\Request;
+use cxphp\core\httpd\Response;
 
 /**
  * App 基础类

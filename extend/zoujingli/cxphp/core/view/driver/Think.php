@@ -16,10 +16,9 @@ declare (strict_types=1);
 // | github 代码仓库：https://github.com/zoujingli/cxphp
 // +----------------------------------------------------------------------
 
-namespace cxphp\http\view\driver;
+namespace cxphp\core\view\driver;
 
-use cxphp\core\Exception;
-use cxphp\http\view\Driver;
+use cxphp\core\view\Driver;
 use think\Template;
 
 /**
@@ -37,51 +36,51 @@ class Think extends Driver
     {
         $this->config['view_path'] = $this->config['view_path'] ?? $this->app->getAppPath();
         $this->config['view_suffix'] = $this->config['view_suffix'] ?? 'html';
-        $this->config['cache_path'] = $this->config['cache_path'] ?? $this->app->getRuntimePath('temp') . DIRECTORY_SEPARATOR;
+        $this->config['cache_path'] = $this->config['cache_path'] ?? $this->app->getRuntimePath() . 'temp' . DIRECTORY_SEPARATOR;
         $this->config['cache_suffix'] = $this->config['cache_suffix'] ?? 'php';
         $this->view = $this->view ?: new Template($this->config);
     }
 
     /**
-     * 解析模板文件
-     * @param string $name 模板名称
+     * 自动定位模板文件
+     * @access private
+     * @param string $template 模板文件规则
      * @return string
-     * @throws Exception
      */
-    protected function parseTemplate($name)
+    private function parseTemplate(string $template): string
     {
-        if (stripos($name, '.' . $this->config['view_suffix']) == false) {
-            $name .= '.' . $this->config['view_suffix'];
-        }
-        if (file_exists($name) && is_file($name)) {
-            return $name;
-        }
-        if (stripos($name, '@') !== false) {
-            [$module, $file] = explode('@', $name);
-            $temp = "{$module}/view/{$file}";
-        } elseif ($name === '.' . $this->config['view_suffix']) {
-            $temp = $this->app->request->module . '/view/' . strtr($this->app->request->realpath, '.', '/') . '/' . strtolower($this->app->request->action) . $name;
-        } elseif (substr_count($name, '/') === 0) {
-            $temp = $this->app->request->module . '/view/' . strtr($this->app->request->realpath, '.', '/') . '/' . $name;
-        } elseif (substr_count($name, '/') === 1) {
-            $temp = $this->app->request->module . '/view/' . $name;
+        if (strpos($template, '@') !== false) {
+            [$app, $template] = explode('@', $template);
         } else {
-            $temp = $name;
+            $app = $this->app->request->module;
         }
-        $realname = $this->app->getAppPath($temp);
-        if (file_exists($realname) && is_file($realname)) {
-            return $realname;
+        $depr = $this->config['view_depr'] ?? DIRECTORY_SEPARATOR;
+        $viewpath = $this->config['view_path'] . $app . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR;
+        if (0 !== strpos($template, '/')) {
+            $realpath = $this->app->request->realpath;
+            $template = str_replace(['/', ':'], $depr, $template);
+            if ($template === '') {
+                $template = str_replace('.', DIRECTORY_SEPARATOR, $realpath) . $depr . str_snake($this->app->request->action);
+            } elseif (strpos($template, $depr) === false) {
+                $template = str_replace('.', DIRECTORY_SEPARATOR, $realpath) . $depr . $template;
+            }
         } else {
-            throw new Exception("Template {$temp} not found.");
+            $template = str_replace(['/', ':'], $depr, trim($template, '/\\'));
+        }
+        $extension = '.' . trim($this->config['view_suffix'], '.');
+        if (substr($template, -strlen($extension)) !== $extension) {
+            return $viewpath . $template . $extension;
+        } else {
+            return $viewpath . $template;
         }
     }
+
 
     /**
      * 模板文件渲染
      * @param string $name 模板文件
      * @param array $data 模板变量
      * @return string
-     * @throws Exception
      */
     public function fetch(string $name, array $data = []): string
     {

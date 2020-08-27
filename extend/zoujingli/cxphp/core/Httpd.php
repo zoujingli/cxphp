@@ -18,8 +18,8 @@ declare (strict_types=1);
 
 namespace cxphp\core;
 
-use cxphp\http\Request;
-use cxphp\http\Response;
+use cxphp\core\httpd\Request;
+use cxphp\core\httpd\Response;
 use Workerman\Connection\TcpConnection;
 use Workerman\Protocols\Http;
 use Workerman\Timer;

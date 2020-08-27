@@ -16,15 +16,42 @@ declare (strict_types=1);
 // | github 代码仓库：https://github.com/zoujingli/cxphp
 // +----------------------------------------------------------------------
 
-namespace cxphp\http\session\driver;
+namespace cxphp\core\view;
 
-use cxphp\http\session\Driver;
-use Workerman\Protocols\Http\Session\FileSessionHandler;
+use cxphp\core\App;
 
 /**
- * Class File
- * @package cxphp\session\driver
+ * 视图驱动接口
+ * Class Driver
+ * @package cxphp\http\view
  */
-class File extends FileSessionHandler implements Driver
+abstract class Driver
 {
+    /** @var App */
+    protected $app;
+
+    /** @var array */
+    protected $config;
+
+    /**
+     * Driver constructor.
+     * @param App $app
+     * @param array $config
+     */
+    public function __construct(App $app, array $config = [])
+    {
+        $this->app = $app;
+        $this->config = $config;
+        if (method_exists($this, 'initialize')) {
+            $this->initialize();
+        }
+    }
+
+    /**
+     * 渲染模板文件
+     * @param string $name 模板文件
+     * @param array $data 模板变量
+     */
+    abstract public function fetch(string $name, array $data = []);
+
 }

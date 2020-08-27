@@ -16,9 +16,11 @@ declare (strict_types=1);
 // | github 代码仓库：https://github.com/zoujingli/cxphp
 // +----------------------------------------------------------------------
 
-namespace cxphp\http;
+namespace cxphp\core\httpd;
 
 use cxphp\core\App;
+use cxphp\core\View;
+use function Composer\Autoload\includeFile;
 
 /**
  * 响应对象
@@ -91,8 +93,7 @@ class Response extends \Workerman\Protocols\Http\Response
      */
     public function redirect($location, $status = 302, $headers = [])
     {
-        $this->withStatus($status);
-        $this->header('Location', $location);
+        $this->withStatus($status)->header('Location', $location);
         if (!empty($headers)) $this->withHeaders($headers);
         return $this;
     }
@@ -130,7 +131,7 @@ class Response extends \Workerman\Protocols\Http\Response
     {
         error_reporting(0);
         $this->_status = 500;
-        $template = $this->app->getCorePath('tpl' . DIRECTORY_SEPARATOR . 'exception.php');
+        $template = $this->app->getCorePath('tpl' . DIRECTORY_SEPARATOR . '500.php');
         $this->_body = file_exists($template) ? $this->execPhpFile($template, ['e' => $exception]) : $exception->getMessage();
         return $this;
     }
@@ -141,7 +142,7 @@ class Response extends \Workerman\Protocols\Http\Response
      */
     public function notFoundPage()
     {
-        $template = $this->app->getCorePath('tpl' . DIRECTORY_SEPARATOR . 'notfound.php');
+        $template = $this->app->getCorePath('tpl' . DIRECTORY_SEPARATOR . '404.php');
         $this->_body = file_exists($template) ? $this->execPhpFile($template) : '404 Page not found.';
         $this->_status = 404;
         return $this;

@@ -21,7 +21,7 @@ namespace cxphp\core;
 /**
  * Class Cache
  * @package cxphp\core
- * @mixin \cxphp\core\cache\Driver\File
+ * @see \cxphp\core\cache\Driver
  */
 class Cache extends Manager
 {

@@ -16,7 +16,7 @@ declare (strict_types=1);
 // | github 代码仓库：https://github.com/zoujingli/cxphp
 // +----------------------------------------------------------------------
 
-namespace cxphp\http\request;
+namespace cxphp\core\httpd\request;
 
 use cxphp\core\Exception;
 
@@ -44,10 +44,10 @@ class UploadFile extends \SplFileInfo
 
     /**
      * UploadFile constructor.
-     * @param $filename
-     * @param $uploadName
-     * @param $uploadMimeType
-     * @param $uploadErrorCode
+     * @param string $filename
+     * @param string $uploadName
+     * @param string $uploadMimeType
+     * @param string $uploadErrorCode
      */
     public function __construct($filename, $uploadName, $uploadMimeType, $uploadErrorCode)
     {

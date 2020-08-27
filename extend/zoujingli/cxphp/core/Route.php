@@ -18,7 +18,7 @@ declare (strict_types=1);
 
 namespace cxphp\core;
 
-use cxphp\http\Request;
+use cxphp\core\httpd\Request;
 
 /**
  * 基础路由管理器
