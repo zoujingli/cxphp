@@ -90,7 +90,7 @@ class App
      * App constructor.
      * @param string $rootPath
      */
-    public function __construct($rootPath = '')
+    public function __construct(string $rootPath = '')
     {
         $this->corePath = dirname(__DIR__) . DIRECTORY_SEPARATOR;
         if (empty($rootPath)) {
@@ -98,16 +98,16 @@ class App
         } else {
             $this->rootPath = rtrim($rootPath, '\\/') . DIRECTORY_SEPARATOR;
         }
-        $this->instance('app', $this);
+        $this->setInstance('app', $this);
     }
 
     /**
      * 获取应用属性对象
      * @param string $name 属性名称
-     * @return object
+     * @return mixed
      * @throws Exception
      */
-    public function __get($name)
+    public function __get(string $name)
     {
         return $this->make($name);
     }
@@ -117,7 +117,7 @@ class App
      * @param bool $listen
      * @return static
      */
-    public static function run($listen = false)
+    public static function run(bool $listen = false): App
     {
         if (is_null(self::$object)) {
             static::$object = new static;
@@ -148,7 +148,7 @@ class App
         } elseif ($concrete instanceof \Closure) {
             $this->bind[$abstract] = $concrete;
         } elseif (is_object($concrete)) {
-            $this->instance($abstract, $concrete);
+            $this->setInstance($abstract, $concrete);
         } else {
             $abstract = $this->getAlias($abstract);
             $this->bind[$abstract] = $concrete;
@@ -187,7 +187,7 @@ class App
      * @param object $instance 类的实例
      * @return $this
      */
-    public function instance(string $abstract, $instance): App
+    public function setInstance(string $abstract, $instance): App
     {
         $abstract = $this->getAlias($abstract);
         $this->instances[$abstract] = $instance;
@@ -199,7 +199,7 @@ class App
      * @param string $abstract 类名或者标识
      * @return $this
      */
-    public function unInstance(string $abstract): App
+    public function delInstance(string $abstract): App
     {
         $name = $this->getAlias($abstract);
         if (isset($this->instances[$name])) {
@@ -335,11 +335,8 @@ class App
      */
     public function getAlias(string $abstract): string
     {
-        if (isset($this->bind[$abstract])) {
-            $bind = $this->bind[$abstract];
-            if (is_string($bind)) {
-                return $this->getAlias($bind);
-            }
+        if (isset($this->bind[$abstract]) && is_string($this->bind[$abstract])) {
+            return $this->getAlias($this->bind[$abstract]);
         }
         return $abstract;
     }
@@ -349,7 +346,7 @@ class App
      * @param string $suffix
      * @return string
      */
-    public function getAppPath($suffix = '')
+    public function getAppPath(string $suffix = ''): string
     {
         return $this->rootPath . 'app' . DIRECTORY_SEPARATOR . $suffix;
     }
@@ -359,7 +356,7 @@ class App
      * @param string $suffix
      * @return string
      */
-    public function getCorePath($suffix = '')
+    public function getCorePath(string $suffix = ''): string
     {
         return $this->corePath . $suffix;
     }
@@ -369,7 +366,7 @@ class App
      * @param string $suffix
      * @return string
      */
-    public function getRootPath($suffix = '')
+    public function getRootPath(string $suffix = ''): string
     {
         return $this->rootPath . $suffix;
     }
@@ -379,7 +376,7 @@ class App
      * @param string $suffix
      * @return string
      */
-    public function getRoutePath($suffix = '')
+    public function getRoutePath(string $suffix = ''): string
     {
         return $this->rootPath . 'route' . DIRECTORY_SEPARATOR . $suffix;
     }
@@ -389,7 +386,7 @@ class App
      * @param string $suffix
      * @return string
      */
-    public function getConfigPath($suffix = '')
+    public function getConfigPath(string $suffix = ''): string
     {
         return $this->rootPath . 'config' . DIRECTORY_SEPARATOR . $suffix;
     }
@@ -399,7 +396,7 @@ class App
      * @param string $suffix
      * @return string
      */
-    public function getPublicPath($suffix = '')
+    public function getPublicPath(string $suffix = ''): string
     {
         return $this->rootPath . 'public' . DIRECTORY_SEPARATOR . $suffix;
     }
@@ -410,7 +407,7 @@ class App
      * @param string $suffix
      * @return string
      */
-    public function getRuntimePath($suffix = '')
+    public function getRuntimePath(string $suffix = ''): string
     {
         return $this->rootPath . 'runtime' . DIRECTORY_SEPARATOR . $suffix;
     }

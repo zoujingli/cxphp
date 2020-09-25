@@ -119,7 +119,7 @@ abstract class Driver implements LoggerInterface
 
     /**
      * 记录日志信息
-     * @param string $level 日志级别
+     * @param mixed $level 日志级别
      * @param mixed $message 日志信息
      * @param array $context 日志内容
      */

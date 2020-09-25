@@ -87,7 +87,7 @@ class Httpd
     {
         $this->worker = new Worker($this->config['listen'] ?? 'http://0.0.0.0:8080', $this->config['context'] ?? []);
         $this->worker->name = 'WebService';
-        $this->worker->count = 4;
+        $this->worker->count = 1;
         foreach (['name', 'count', 'user', 'group', 'reusePort', 'transport'] as $property) {
             if (isset($this->config[$property])) $this->worker->$property = $this->config[$property];
         }
@@ -95,8 +95,8 @@ class Httpd
             $this->app->config->reload();
             Http::requestClass(Request::class);
             $worker->onMessage = function (TcpConnection $connection, Request $request) {
-                $this->app->instance('request', $request);
-                $this->app->instance('response', Response::make());
+                $this->app->setInstance('request', $request);
+                $this->app->setInstance('response', Response::make());
                 static $requestCount = 0;
                 if (++$requestCount > $this->maxRequestCount) {
                     $this->tryToGracefulExit();
